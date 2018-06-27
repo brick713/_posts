@@ -26,7 +26,7 @@ tags: [安全,原理,总结]
 
 此处可以获取cache_admin的信息，内容如下：
 
-![Cache_admin](http://7sbxd0.com1.z0.glb.clouddn.com/PHPCMS%20AUTHKEY.png)
+![PHPCMS AUTHKEY.png](https://i.loli.net/2018/06/27/5b33658cc7db1.png)
 
 可以获得authkey和调用它的文件`api.php` 
 
@@ -47,7 +47,7 @@ tags: [安全,原理,总结]
 
 执行完后的结果：
 
-![结果](http://7sbxd0.com1.z0.glb.clouddn.com/phpauthker%20lou.png)
+![结果](https://i.loli.net/2018/06/27/5b3365aa949dc.png)
 
 # 修复
 

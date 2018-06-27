@@ -25,16 +25,16 @@ DNS反射放大攻击主要是利用DNS回复包比请求包大的特点，放�
 
 -  全部是大量的DNS响应请求（Response请求）
 
-![147159808627181.jpg](http://7sbxd0.com1.z0.glb.clouddn.com/147159808627181.jpg?imageView2/0/format/jpg)
+![147159808627181.jpg](https://i.loli.net/2018/06/27/5b33620123f20.jpg)
 
 - 通常里面包含一些不存在或者生僻的域名，经过循环查询从而放大DNS流量
 
-![147159840859200.jpg](http://7sbxd0.com1.z0.glb.clouddn.com/147159840859200.jpg?imageView2/0/format/jpg)
+![147159840859200.jpg](https://i.loli.net/2018/06/27/5b33620124647.jpg)
 
 
 - 会将将 OPT RR 字段中的 UDP 报文大小设置为很大的值（如 4096）
 
-![147159870918672.jpg](http://7sbxd0.com1.z0.glb.clouddn.com/147159870918672.jpg?imageView2/0/format/jpg)
+![147159870918672.jpg](https://i.loli.net/2018/06/27/5b336201000de.jpg)
 
 通过这样放大了攻击流量。发送的 DNS 查询请求数据包大小一般为 60 字节左右，而查询返回结果的数据包大小通常为 3000 字节以上，因此，使用该方式进行放大攻击能够达到 50 倍以上的放大效果。
 

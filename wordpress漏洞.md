@@ -25,7 +25,7 @@ http://"+site+"/wp-content/uploads/wpallimport/uploads/"+up_dir+"/ 路径访问�
 
 因为该插件版本已经更新了，有问题的版本已经没法下载了。只能看别人的具体分析了。
 
-[WordPress WP All 3.2.3 Shell Upload](http://www.pritect.net/blog/wp-all-import-3-2-3-pro-4-0-3-vulnerability-breakdown)
+[WordPress WP All 3.2.3 Shell Upload](https://0x9.me/hqvtU)
 
 # 0X02 检测
 

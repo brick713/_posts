@@ -5,7 +5,7 @@ tags: [安全,配置]
 <!-- more -->
 最近看了一些Nginx的配置的文章主要和性能有关，包括一些安全上的配置，并不对所有设备适用，总结下来觉得有用的可以自取，另外是加深自己对服务器的理解。其中有一些有关DDOS的配置。内容参考了两篇文章和自己的一些安全理解。文章地址如下：
 
-[Tuning NGINX for Performance](http://nginx.com/blog/tuning-nginx/)
+[Tuning NGINX for Performance](https://nginx.com/blog/tuning-nginx/)
 
 [Mitigating DDoS Attacks with NGINX and NGINX Plus](https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/)
 

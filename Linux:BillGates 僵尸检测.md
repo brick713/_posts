@@ -11,17 +11,17 @@ tags: [僵尸主机,入侵分析,安全事件]
 
 先通过**Tcpdump**抓了下机器的包。发现在大量的SSH包中，还存在比较大的**TCP**的包，而这些包都指向一个**IP 183.56.173.197**，把这部分包都抓下来分析下。包里内容如下：
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di1.png)
+![di1.png](https://i.loli.net/2018/06/27/5b33642e2cc3b.png)
 
 这个是个比较明显的和僵尸主机的CNC回传通信，应该是确认僵尸存活使用的。
 
 顺便查了下这个**IP 183.56.173.197**，就是一个恶意的主机节点。而且应该还是个存活的节点。
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di2.png)
+![di2.png](https://i.loli.net/2018/06/27/5b33644eaf0ff.png)
 
 查询了一下，发现这个主机节点控制一种叫**Linux/BillGates.Lite**僵尸网络。这种僵尸网络主要是被用来进行DDOS攻击，同样会窃取服务的文件发送给僵尸主机。当僵尸存在的时候会在机器的**/tmp/**路径下生产一个标志性文件**gates.lod**，于是我去路径下很快就发现了这个文件。
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di3.png)
+![di3.png](https://i.loli.net/2018/06/27/5b336465275f3.png)
 
 到此基本上就确认了是Linux/BillGates影响了该机器。
 
@@ -30,26 +30,25 @@ tags: [僵尸主机,入侵分析,安全事件]
 既然机器被人黑了，总要查下攻击者怎么进来的。
 使用```last```命令看一下近期的登陆情况。发现了端倪：
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di4.png)
-
+![di4.png](https://i.loli.net/2018/06/27/5b336410c64eb.png)
 这两个IP是外网IP而且非常搞笑的是他们的地址完全和机器无关
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di5.png)
+![di5.png](https://i.loli.net/2018/06/27/5b3363eaac21d.png)
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di6.png)
+![di6.png](https://i.loli.net/2018/06/27/5b33638e40aca.png)
 
 进来的时间也非常可疑，凌晨2点上下。很明显就是攻击者啦。至于怎么进来的，从这看应该是通过SSH暴力破解进入的机器。这个**Oracle**账号的密码应该是过于简单了。
 
 既然已经定位到账号了。看看他在这个时间段都干嘛了。进入用户目录/home/oracle/，查看.bash_history文件：
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di7.png)
+![di7.png](https://i.loli.net/2018/06/27/5b33635a86a03.png)
 
 一目了然，攻击者进来之后，先进入了**/tmp**目录，然后去僵尸主机上下载了一个可执行文件，加权后执行然后退出该账号。
 这个可执行文件最后没有找到。细想一下应该是执行完后自删除了，不留痕迹。
 
 最后生成的恶意文件gates.lod，权限账户就是为oracle。
 
-![](http://7sbxd0.com1.z0.glb.clouddn.com/di8.png)
+![di8.png](https://i.loli.net/2018/06/27/5b3363303f99e.png)
 
 # 0x03 结论
 
@@ -73,5 +72,5 @@ tags: [僵尸主机,入侵分析,安全事件]
 
  最后附上个连接，是详细分析Linux/BillGates的有兴趣的可以看看
  
-[MMD-0039-2015 - ChinaZ made new malware: ELF Linux/BillGates.Lite](http://blog.malwaremustdie.org/2015/08/mmd-0039-2015-chinaz-made-new-malware.html)
+[MMD-0039-2015 - ChinaZ made new malware: ELF Linux/BillGates.Lite](https://0x9.me/IPCTs)
 

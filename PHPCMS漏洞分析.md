@@ -194,8 +194,7 @@ $password = isset($_POST['password']) && trim($_POST['password']) ? addslashes(u
 
 如果能拿到auth_key的话可以通过auth\_key进行注入，具体方法请参考：
 
-[PHPCMS某处设计缺陷可致authkey泄露](http://www.wooyun.org/bugs/wooyun-2010-0106892)
-[PHPCMS V9 一个为所欲为的漏洞](http://0cx.cc/phpcms_phpsso_auth_key.jspx)
+[PHPCMS V9 一个为所欲为的漏洞](https://0x9.me/7CeWU)
 
 
 # 尾巴
