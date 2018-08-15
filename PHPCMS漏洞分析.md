@@ -25,21 +25,20 @@ tags: 安全心得
 
 
 > \phpcms\modules\member\index.php
-
-~~~    
-
-            $username = isset($_POST['username']) && is_username($_POST['username']) ? trim($_POST['username']) : showmessage(L('username_empty'), HTTP_REFERER);
-            $password = isset($_POST['password']) && trim($_POST['password']) ? trim($_POST['password']) : showmessage(L('password_empty'), HTTP_REFERER);
-            $cookietime = intval($_POST['cookietime']);
-            $synloginstr = ''; //同步登陆js代码
+   
+```
+$username = isset($_POST['username']) && is_username($_POST['username']) ? trim($_POST['username']) : showmessage(L('username_empty'), HTTP_REFERER);
+$password = isset($_POST['password']) && trim($_POST['password']) ? trim($_POST['password']) : showmessage(L('password_empty'), HTTP_REFERER);
+$cookietime = intval($_POST['cookietime']);
+$synloginstr = ''; //同步登陆js代码
             
-            if(pc_base::load_config('system', 'phpsso')) 
-            {
-                $this->_init_phpsso();
-                //通过client的ps_member_login方法传入$username、$password获取一段数据
-                $status = $this->client->ps_member_login($username, $password);
-                $memberinfo = unserialize($status);
-~~~
+if(pc_base::load_config('system', 'phpsso')) 
+{
+$this->_init_phpsso();
+//通过client的ps_member_login方法传入$username、$password获取一段数据
+$status = $this->client->ps_member_login($username, $password);
+$memberinfo = unserialize($status);
+```
 **注意这段PHP代码中，username使用的is_username进行了过滤而password没有做任何处理。**
 
 is_username(）这个函数的功能是检查用户名是否符合规定，是PHPCMS中的一个检查机制。具体代码如下：
@@ -68,28 +67,28 @@ Login对变量进行了处理之后将变量创给了ps\_member\_login函数
 继续跟进ps\_member\_login和\_ps\_send函数
 
 ```
-	/**
-	 * 用户登陆
-	 * @param string $username 	用户名
-	 * @param string $password 	密码
-	 * @param int $isemail	email
-	 * @return int {-2;密码错误;-1:用户名不存在;array(userinfo):用户信息}
-	 */
-	public function ps_member_login($username, $password, $isemail=0) {
-		if($isemail) {
-			if(!$this->_is_email($username)) {
-				return -3;
-			}
-			$return = $this->_ps_send('login', array('email'=>$username, 'password'=>$password));
-		} else {
-			$return = $this->_ps_send('login', array('username'=>$username, 'password'=>$password));
+/**
+* 用户登陆
+* @param string $username 	用户名
+* @param string $password 	密码
+* @param int $isemail	email
+* @return int {-2;密码错误;-1:用户名不存在;array(userinfo):用户信息}
+*/
+public function ps_member_login($username, $password, $isemail=0) {
+	if($isemail) {
+		if(!$this->_is_email($username)) {
+			return -3;
 		}
-		return $return;
+		$return = $this->_ps_send('login', array('email'=>$username, 'password'=>$password));
+	} else {
+		$return = $this->_ps_send('login', array('username'=>$username, 'password'=>$password));
 	}
- private function _ps_send($action, $data = null) 
-    {
-         return $this->_ps_post($this->ps_api_url."/index.php?m=phpsso&c=index&a=".$action, 500000, $this->auth_data($data));
-    }
+	return $return;
+}
+private function _ps_send($action, $data = null) 
+{
+    return $this->_ps_post($this->ps_api_url."/index.php?m=phpsso&c=index&a=".$action, 500000, $this->auth_data($data));
+}
 ```
 通过ps_member_login方法获取一段数据之后，再由\_ps\_send向phpsso发送http包的post数据，phpsso认证完成后，将用户的信息返回给member的login送入数据库进行查询处理。
 
@@ -114,19 +113,15 @@ password字段如果存在特殊字符，在传入到程序时仍然会被转义
 
 ```
 if(isset($_POST['data'])) 
-        {
-
-            parse_str(sys_auth($_POST['data'], 'DECODE', $this->applist[$this->appid]['authkey']), $this->data);
-                    
-            if(empty($this->data) || !is_array($this->data)) {
-                exit('0');
-            }
-        } 
-        else 
-        {
-            exit('0');
+{
+parse_str(sys_auth($_POST['data'], 'DECODE', $this->applist[$this->appid]['authkey']), $this->data);
+    if(empty($this->data) || !is_array($this->data)) {
+        exit('0');
         }
-
+} 
+    else {
+        exit('0');
+}
 ```
 
 这里POST数据使用了parse_str函数进行处理。它的功能是解析出POST数据中的变量值。

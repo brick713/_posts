@@ -11,19 +11,16 @@ tags: [安全,原理,总结]
 `phpcms/phpsso\_server/phpcms/modules/phpsso/index.php`
 
 中有一段代码如下：
-    
-    /**
-         * 获取应用列表
-         */
-        public function getapplist() {
-                $applist = getcache('applist', 'admin');
-                exit(serialize($applist));
+``` 
+/**
+* 获取应用列表
+*/
+    public function getapplist() {
+        $applist = getcache('applist', 'admin');
+        exit(serialize($applist));
         }
-
+```
     
-        
-
-
 此处可以获取cache_admin的信息，内容如下：
 
 ![PHPCMS AUTHKEY.png](https://i.loli.net/2018/06/27/5b33658cc7db1.png)
