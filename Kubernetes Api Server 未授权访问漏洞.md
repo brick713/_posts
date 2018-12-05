@@ -1,5 +1,5 @@
 title: Kubernetes Api Server 未授权访问漏洞
-date: 201-12-05
+date: 2018-12-05
 ----
 
 # 0x00 漏洞原因
