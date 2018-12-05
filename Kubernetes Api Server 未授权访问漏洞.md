@@ -40,7 +40,7 @@ kubectl -s ip:port  get pods
 ```
 kubectl -s ip:port  --namespace=default exec -it dockername bash
 ```
-![获取容器权限](media/15440206868489.jpg)
+![获取容器权限](https://i.loli.net/2018/12/06/5c07f8c667de8.png)
 
 这样就达到了控制容器的目的，但是容器的权限本身是不稳定的，如果宿主机本身的内核有问题的话，可以利用脏牛漏洞进行提权，获取宿主机的权限。具体可以参考：
 
