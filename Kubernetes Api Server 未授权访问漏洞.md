@@ -1,5 +1,4 @@
 title: Kubernetes Api Server 未授权访问漏洞
-top_img: https://i.loli.net/2018/12/07/5c0a082f37145.png
 tags: [漏洞]
 date: 2018-12-05
 ----
